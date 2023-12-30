@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import Header from './Components/Header/Header.js'
-import Checklist from './Components/Checklist/Checklist.js'
+import ListTable from './Components/listTable/listTable.js'
 import './App.css';
 
 
@@ -9,8 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Header/>
-        <Checklist/>
-        <img src={logo} className="App-logo" alt="logo" />
+        <ListTable/>
       </header>
     </div>
   );
