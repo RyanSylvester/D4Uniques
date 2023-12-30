@@ -6,8 +6,8 @@ class ListTable extends React.Component {
         return (
             <div>
                 <p>100%</p>
-                <div class="ProgressBar"/>
-                <div class="listContainer">
+                <div className="ProgressBar"/>
+                <div className="listContainer">
                     <Checklist title="Head"/>
                     <Checklist title="Chest"/>
                     <Checklist title="Gloves"/>
