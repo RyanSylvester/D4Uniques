@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #323238;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,11 +16,6 @@
   color: #61dafb;
 }
 
-.uniquesTable{
-  display: flex;
-  justify-content: center;
-}
-
 .ProgressBar {
   height: 20px;
   background-color: white;
@@ -30,6 +25,9 @@
 }
 
 .listContainer{
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
   margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
@@ -40,13 +38,16 @@
 }
 
 .checklistColumn{
-  border-top: 1px solid #ffffff42;
+  border-top: 1px solid #29292942;
   width: 170px;
   margin-bottom: 20px;
   flex-grow: 1;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .columnTitle{
+  color: black;
   font-size: 17px;
   margin-bottom: 5px;
   padding-left: 10px;
@@ -54,17 +55,19 @@
 }
 
 .itemContainer{
-  border-style: solid;
+  /* border-style: solid; */
   margin-top: 10px;
   height: 40px;
   border-radius: 10px;
-  
+  background-color: #c5c5c542;
   display: flex;
   align-items: center;
   justify-content: flex-start; 
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
 }
 
 .itemTitle{
+  color: black;
   font-size: 12px;
   width: 80%;
   padding-left: 5px;

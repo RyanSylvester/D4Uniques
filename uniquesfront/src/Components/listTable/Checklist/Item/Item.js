@@ -5,7 +5,7 @@ import Checkbox from '@mui/material/Checkbox';
 const theme = createTheme({
     palette: {
       primary: {
-        main: '#FFFFFF',
+        main: '#000000',
       },
       secondary: {
         main: '#000000',
@@ -25,9 +25,9 @@ const Item = ({ title }) => {
                         className="itemCheck" 
                         color="primary"
                         sx={{
-                            color: '#FFFFFF',
+                            color: '#000000',
                             '&.Mui-checked': {
-                                color: '#FFFFFF',
+                                color: '#000000',
                             },
                         }}
                     />
