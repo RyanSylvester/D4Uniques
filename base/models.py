@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -9,3 +10,6 @@ class Item(models.Model):
     isUber = models.BooleanField(default=False)
     def __str__(self):
         return self.name
+
+class CustomUser(AbstractUser):
+    items = models.ManyToManyField(Item, blank=True)
