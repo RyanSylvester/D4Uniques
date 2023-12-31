@@ -2,19 +2,8 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
+  background-color: #323238;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,33 +17,37 @@
 }
 
 .ProgressBar {
-  
   height: 20px;
   background-color: white;
   border-radius: 20px;
+  width: 60vw;
+  margin: auto;
 }
 
-
-
 .listContainer{
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
   margin-top: 40px;
   display: flex;
+  flex-wrap: wrap;
   margin-left: 0px; 
-  width: 1400px;
-  height: 400px;
   justify-content: space-around;
-  margin-left: auto; /* Add this */
-  margin-right: auto; /* Add this */
+  margin-left: auto; 
+  margin-right: auto; 
 }
 
 .checklistColumn{
-  border-top: 1px solid #ffffff42;
+  border-top: 1px solid #29292942;
   width: 170px;
-  height: 20px;
+  margin-bottom: 20px;
   flex-grow: 1;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .columnTitle{
+  color: black;
   font-size: 17px;
   margin-bottom: 5px;
   padding-left: 10px;
@@ -62,17 +55,19 @@
 }
 
 .itemContainer{
-  border-style: solid;
+  /* border-style: solid; */
   margin-top: 10px;
   height: 40px;
   border-radius: 10px;
-  
+  background-color: #c5c5c542;
   display: flex;
   align-items: center;
   justify-content: flex-start; 
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
 }
 
 .itemTitle{
+  color: black;
   font-size: 12px;
   width: 80%;
   padding-left: 5px;
