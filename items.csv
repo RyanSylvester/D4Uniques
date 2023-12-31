@@ -1,0 +1,78 @@
+id,name,character,category,isUber
+1,Banished Lord's Talisman,all,jewelery,FALSE
+2,Fists of Fate,all,gloves,FALSE
+3,Flickerstep,all,boots,FALSE
+4,Frostburn,all,gloves,FALSE
+5,Godslayer Crown,all,helm,FALSE
+6,Mother's Embrace,all,jewelery,FALSE
+7,Penitent Greaves,all,boots,FALSE
+8,Razorplate,all,chest,FALSE
+9,Soulbrand,all,chest,FALSE
+10,Tassets of the Dawning Sky,all,pants,FALSE
+11,Temerity,all,pants,FALSE
+12,The Butcher's Cleaver,all,weapon,FALSE
+13,Tibault's Will,all,pants,FALSE
+14,X'Fal's Corroded Signet,all,jewelery,FALSE
+15,Ahavarion Spear of Lycander,all,weapon,TRUE
+16,Andariel's Visage,all,helm,TRUE
+17,Doombringer,all,weapon,TRUE
+18,Harlequin Crest,all,helm,TRUE
+19,Melted Heart of Selig,all,jewelery,TRUE
+20,Ring of Starless Skies,all,jewelery,TRUE
+21,The Grandfather,all,weapon,TRUE
+22,Airidah's Inexorable Will,druid,jewelery,FALSE
+23,Dolmen Stone,druid,jewelery,FALSE
+24,Fleshrender,druid,weapon,FALSE
+25,Greatstaff of the Crone,druid,weapon,FALSE
+26,Hunter's Zenith,druid,jewelery,FALSE
+27,Insatiable Fury,druid,chest,FALSE
+28,Mad Wolf's Glee,druid,chest,FALSE
+29,Storm's Companion,druid,pants,FALSE
+30,Tempest Roar,druid,helm,FALSE
+31,Vasily's Prayer,druid,helm,FALSE
+32,Waxing Gibbous,druid,weapon,FALSE
+33,"100,000 Steps",barb,Boots,FALSE
+34,Ancient's Oath,barb,weapon,FALSE
+35,Azurewrath,barb,weapon,FALSE
+36,Battle Trance,barb,jewelery,FALSE
+37,Fields of Crimson,barb,weapon,FALSE
+38,Gohr's Devastating Grips,barb,gloves,FALSE
+39,Hellhammer,barb,weapon,FALSE
+40,Overkill,barb,weapon,FALSE
+41,Rage of Harrogath,barb,chest,FALSE
+42,Ramaladni's Magnum Opus,barb,weapon,FALSE
+43,Ring of Red Furor,barb,jewelery,FALSE
+44,Tuskhelm of Joritz the Mighty,barb,helm,FALSE
+45,Black River,necro,weapon,FALSE
+46,Blood Artisan's Cuirass,necro,chest,FALSE
+47,Blood Moon Breeches,necro,pants,FALSE
+48,Bloodless Scream,necro,weapon,FALSE
+49,Deathless Visage,necro,helm,FALSE
+50,Deathspeaker's Pendant,necro,jewelery,FALSE
+51,Greaves of the Empty Tomb,necro,boots,FALSE
+52,Howl from Below,necro,gloves,FALSE
+53,Lidless Wall,necro,weapon,FALSE
+54,Ring of Mendeln,necro,jewelery,FALSE
+55,Ring of Sacrilegious Soul,necro,jewelery,FALSE
+56,Asheara's Khanjar,rogue,weapon,FALSE
+57,Condemnation,rogue,weapon,FALSE
+58,Cowl of the Nameless,rogue,helm,FALSE
+59,Eaglehorn,rogue,weapon,FALSE
+60,Eyes in the Dark,rogue,Pants,FALSE
+61,Grasp of Shadow,rogue,gloves,FALSE
+62,Scoundrel's Leathers,rogue,chest,FALSE
+63,Skyhunter,rogue,weapon,FALSE
+64,Windforce,rogue,weapon,FALSE
+65,Word of Hakan,rogue,jewelery,FALSE
+66,Writhing Band of Trickery,rogue,jewelery,FALSE
+67,Blue Rose,sorc,jewelery,FALSE
+68,Esadora's Overflowing Cameo,sorc,jewelery,FALSE
+69,Esu's Heirloom,sorc,boots,FALSE
+70,Flamescar,sorc,weapon,FALSE
+71,Gloves of the Illuminator,sorc,gloves,FALSE
+72,Iceheart Brais,sorc,pants,FALSE
+73,Rainment of the Infinite,sorc,chest,FALSE
+74,Staff of Endless Rage,sorc,weapon,FALSE
+75,Staff of Lam Esen,sorc,weapon,FALSE
+76,Tal Rasha's Iridescent Loop,sorc,jewelery,FALSE
+77,The Oculus,sorc,weapon,FALSE
