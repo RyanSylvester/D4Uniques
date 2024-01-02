@@ -1,5 +1,6 @@
 body {
   overflow-y: scroll;
+  min-width: 1027px;
 }
 .App {
   text-align: center;
@@ -61,15 +62,45 @@ body {
 }
 
 .filterBar{
+  padding-top: 30px;
+  margin-left: 50px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  justify-items: start;
-  align-items: start;
+  grid-template-rows: repeat(2, auto);
+  /* grid-auto-rows: minmax(20px, auto); */
+  grid-gap: 10px;
   text-align: left;
-
+}
+.toggles {
+  display: grid;
+  grid-template-columns: repeat(2, auto); /* creates two columns for toggles */
+  gap: 40px; /* space between toggles */
 }
 
+.dropdowns {
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* creates two columns for dropdowns */
+  gap: 40px;
+  
+}
+
+.filterToggle{
+  color:#5A5B74;
+  font-weight: 500;
+  /* background-color: aliceblue; */
+  width: 190px;
+  margin: auto;
+}
+.filterDropdown{
+  /* background-color: turquoise; */
+  width: 190px;
+  margin: auto;
+}
+
+.filterDropdown .MuiFormControl-root {
+  width: fit-content; /* makes the FormControl only as wide as its content */
+  margin:0px;
+}
 .listContainer{
   padding: 20px;
   border-radius: 20px;

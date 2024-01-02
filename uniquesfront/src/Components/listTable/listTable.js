@@ -4,7 +4,11 @@ import Checklist from './Checklist/Checklist.js';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
+import Switch from '@mui/material/Switch';
 import MenuItem from '@mui/material/MenuItem';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Typography from '@mui/material/Typography';
 
 const theme = createTheme({
     palette: {
@@ -108,28 +112,62 @@ class ListTable extends React.Component {
                     </div>
                     
                     <div className="filterBar">
-
-                        <div className="filterDropdown">
-                            <FormControl sx={{ml: 20, minWidth: 150}}>
-                                <InputLabel>Class</InputLabel>
-                                <Select
-                                    sx={{fontFamily: 'Josefin Sans, sans-serif'}}
-                                    label={"Class"}
-                                    value={this.state.filter.character}
-                                    onChange={this.handleCharacterChange}
-                                >  
-                                    <MenuItem value={"all"}>All Classes</MenuItem>
-                                    <MenuItem value={"barb"}>Barbarian</MenuItem>
-                                    <MenuItem value={"druid"}>Druid</MenuItem>
-                                    <MenuItem value={"necro"}>Necromancer</MenuItem>
-                                    <MenuItem value={'sorc'}>Sorcerer</MenuItem>
-                                </Select>
-                            </FormControl>
+                        <div className='toggles'>
+                            <div className="filterToggle">
+                                    <FormGroup>
+                                        <FormControlLabel 
+                                            control={<Switch defaultChecked/>}                                         
+                                            label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Completed</Typography>}/>
+                                    </FormGroup>
+                            </div>
+                            <div className="filterToggle">
+                                <FormGroup>
+                                    <FormControlLabel 
+                                        control={<Switch defaultChecked/>} 
+                                        label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Ubers</Typography>}/>                                    
+                                </FormGroup>
+                            </div>
                         </div>
 
-                        <div className="filterDropdown"></div>
-                        <div className="filterToggle"></div>
-                        <div className="filterToggle"></div>
+                        <div className="dropdowns">
+                            <div className="filterDropdown">
+                                <FormControl sx={{ml: 20, minWidth: 190}}>
+                                    <InputLabel>Class</InputLabel>
+                                    <Select
+                                        sx={{fontFamily: 'Josefin Sans, sans-serif'}}
+                                        label={"Class"}
+                                        value={this.state.filter.character}
+                                        onChange={this.handleCharacterChange}
+                                        
+                                    >  
+                                        <MenuItem value={"all"}>All Classes</MenuItem>
+                                        <MenuItem value={"barb"}>Barbarian</MenuItem>
+                                        <MenuItem value={"druid"}>Druid</MenuItem>
+                                        <MenuItem value={"necro"}>Necromancer</MenuItem>
+                                        <MenuItem value={'sorc'}>Sorcerer</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+
+                            <div className="filterDropdown">
+                                <FormControl sx={{ml: 20, minWidth: 190}}>
+                                    <InputLabel>Class</InputLabel>
+                                    <Select
+                                        sx={{fontFamily: 'Josefin Sans, sans-serif'}}
+                                        label={"Class"}
+                                        value={this.state.filter.character}
+                                        onChange={this.handleCharacterChange}
+                                    >  
+                                        <MenuItem value={"all"}>All Classes</MenuItem>
+                                        <MenuItem value={"barb"}>Barbarian</MenuItem>
+                                        <MenuItem value={"druid"}>Druid</MenuItem>
+                                        <MenuItem value={"necro"}>Necromancer</MenuItem>
+                                        <MenuItem value={'sorc'}>Sorcerer</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 
