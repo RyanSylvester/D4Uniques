@@ -12,9 +12,6 @@ export default function Checklist({title, items}) {
                 {
                     items && items.map(item => <Item title={item.name}/>)
                 }
-                {/* <Item title="Godslayer Crown"/>
-                <Item title="Tempest Roar"/>
-                <Item title="Vasiley's Prayer"/> */}
             </div>
         </div>
     );

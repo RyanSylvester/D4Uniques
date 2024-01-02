@@ -18,7 +18,7 @@ const Item = ({ title }) => {
         <ThemeProvider theme={theme}>
             <div>
                 <div className="itemContainer">
-                    <div className="itemTitle">
+                    <div className="itemTitleWrapper">
                         <p className="itemTitle">{title}</p>
                     </div>
                     <Checkbox 
@@ -27,7 +27,7 @@ const Item = ({ title }) => {
                         sx={{
                             color: '#000000',
                             '&.Mui-checked': {
-                                color: '#000000',
+                                color: '#9BDC9A',
                             },
                         }}
                     />
