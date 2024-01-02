@@ -110,9 +110,10 @@ class ListTable extends React.Component {
                     <div className="filterBar">
 
                         <div className="filterDropdown">
-                            <FormControl sx={{ml: 20, minWidth: 210 }}>
+                            <FormControl sx={{ml: 20, minWidth: 150}}>
                                 <InputLabel>Class</InputLabel>
                                 <Select
+                                    sx={{fontFamily: 'Josefin Sans, sans-serif'}}
                                     label={"Class"}
                                     value={this.state.filter.character}
                                     onChange={this.handleCharacterChange}

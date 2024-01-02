@@ -66,6 +66,7 @@ body {
   grid-gap: 20px;
   justify-items: start;
   align-items: start;
+  text-align: left;
 
 }
 
