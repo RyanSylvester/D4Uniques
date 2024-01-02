@@ -39,8 +39,9 @@ class ListTable extends React.Component {
                 data.forEach(item => {
                     items.push(item);
                 });
-                this.setState({items: items})
-                this.updateItems(this.state.filter.character, this.state.filter.season, this.state.filter.showUbers, this.state.filter.showCompleted);
+                this.setState({items: items}, () => {
+                    this.updateItems(this.state.filter.character, this.state.filter.season, this.state.filter.showUbers, this.state.filter.showCompleted);
+                });
             })
             .catch(error => console.log(error));
     };
@@ -72,6 +73,7 @@ class ListTable extends React.Component {
                 showUbers: newUberState,
                 showCompleted: newCompleteState,
             };
+            console.log(newFilter);
             const newItemsByCategory = this.categorizeItems(this.state.items, newFilter);
             this.setState({
                 filter: newFilter,
@@ -83,8 +85,6 @@ class ListTable extends React.Component {
         const newCharacter = event.target.value;
         this.updateItems(newCharacter, this.state.filter.season, this.state.filter.showUbers, this.state.filter.showCompleted);
     };
-
-
 
     render() {
         const categoryMap = {
