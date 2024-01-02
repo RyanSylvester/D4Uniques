@@ -1,7 +1,21 @@
 import React from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Checklist from './Checklist/Checklist.js';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#F3F3F3', 
+      },
+    },
+  });
 
 class ListTable extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -64,6 +78,11 @@ class ListTable extends React.Component {
                 itemsByCategory: newItemsByCategory,
             });
     };
+    
+    handleCharacterChange = (event) => {
+        const newCharacter = event.target.value;
+        this.updateItems(newCharacter, this.state.filter.season, this.state.filter.showUbers, this.state.filter.showCompleted);
+    };
 
 
 
@@ -79,14 +98,34 @@ class ListTable extends React.Component {
         };
 
         return (
+            
             <div className="uniquesTable">
+                <ThemeProvider theme={theme}>
                 <div className="tableHeader">
                     <div className="ProgressVis">
                         <div className="Progress">100%</div>
                         <div className="ProgressBar"/>
                     </div>
+                    
                     <div className="filterBar">
-                        <div className="filterDropdown"></div>
+
+                        <div className="filterDropdown">
+                            <FormControl sx={{ml: 20, minWidth: 210 }}>
+                                <InputLabel>Class</InputLabel>
+                                <Select
+                                    label={"Class"}
+                                    value={this.state.filter.character}
+                                    onChange={this.handleCharacterChange}
+                                >  
+                                    <MenuItem value={"all"}>All Classes</MenuItem>
+                                    <MenuItem value={"barb"}>Barbarian</MenuItem>
+                                    <MenuItem value={"druid"}>Druid</MenuItem>
+                                    <MenuItem value={"necro"}>Necromancer</MenuItem>
+                                    <MenuItem value={'sorc'}>Sorcerer</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+
                         <div className="filterDropdown"></div>
                         <div className="filterToggle"></div>
                         <div className="filterToggle"></div>
@@ -102,7 +141,7 @@ class ListTable extends React.Component {
                         />
                     ))}
                 </div>
-                
+                </ThemeProvider>
             </div>
         );
     }
