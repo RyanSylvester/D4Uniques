@@ -90,6 +90,11 @@ class ListTable extends React.Component {
         this.updateItems(newCharacter, this.state.filter.season, this.state.filter.showUbers, this.state.filter.showCompleted);
     };
 
+    handleSeasonChange = (event) => {  
+        const newSeason = event.target.value;
+        this.updateItems(this.state.filter.character, newSeason, this.state.filter.showUbers, this.state.filter.showCompleted);
+    }
+
     render() {
         const categoryMap = {
             'helm': 'Helm',
@@ -151,18 +156,17 @@ class ListTable extends React.Component {
 
                             <div className="filterDropdown">
                                 <FormControl sx={{ml: 20, minWidth: 190}}>
-                                    <InputLabel>Class</InputLabel>
+                                    <InputLabel>Release</InputLabel>
                                     <Select
                                         sx={{fontFamily: 'Josefin Sans, sans-serif'}}
-                                        label={"Class"}
-                                        value={this.state.filter.character}
-                                        onChange={this.handleCharacterChange}
+                                        label={"Release"}
+                                        value={this.state.filter.season}
+                                        onChange={this.handleSeasonChange}
                                     >  
-                                        <MenuItem value={"all"}>All Classes</MenuItem>
-                                        <MenuItem value={"barb"}>Barbarian</MenuItem>
-                                        <MenuItem value={"druid"}>Druid</MenuItem>
-                                        <MenuItem value={"necro"}>Necromancer</MenuItem>
-                                        <MenuItem value={'sorc'}>Sorcerer</MenuItem>
+                                        <MenuItem value={"all"}>All</MenuItem>
+                                        <MenuItem value={"base"}>Base Game</MenuItem>
+                                        <MenuItem value={"S1"}>Season 1</MenuItem>
+                                        <MenuItem value={"S2"}>Season 2</MenuItem>
                                     </Select>
                                 </FormControl>
                             </div>
