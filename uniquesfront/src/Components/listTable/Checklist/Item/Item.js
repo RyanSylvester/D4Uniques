@@ -18,7 +18,7 @@ const Item = ({ title }) => {
         <ThemeProvider theme={theme}>
             <div>
                 <div className="itemContainer">
-                    <div className="itemTitle">
+                    <div className="itemTitleWrapper">
                         <p className="itemTitle">{title}</p>
                     </div>
                     <Checkbox 
