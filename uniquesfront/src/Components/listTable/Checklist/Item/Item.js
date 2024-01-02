@@ -27,7 +27,7 @@ const Item = ({ title }) => {
                         sx={{
                             color: '#000000',
                             '&.Mui-checked': {
-                                color: '#000000',
+                                color: '#9BDC9A',
                             },
                         }}
                     />
