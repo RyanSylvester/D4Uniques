@@ -57,7 +57,6 @@ class ListTable extends React.Component {
             let isCorrectCharacter = (item.character === filter.character || filter.character === "all" || item.character === "all");
             let isCorrectSeason = (item.season === filter.season || filter.season === "all");
             let isHidden = (!filter.showUbers && item.uber) || (!filter.showCompleted && item.completed)
-            console.log(item.name, isCorrectCharacter, isCorrectSeason, !isHidden);
             if (isCorrectCharacter && isCorrectSeason && !isHidden) {
                 // Create Catgory if it doesn't exist
                 if (!itemsByCategory[item.category]) {
@@ -77,7 +76,6 @@ class ListTable extends React.Component {
                 showUbers: newUberState,
                 showCompleted: newCompleteState,
             };
-            console.log(newFilter);
             const newItemsByCategory = this.categorizeItems(this.state.items, newFilter);
             this.setState({
                 filter: newFilter,
@@ -93,6 +91,10 @@ class ListTable extends React.Component {
     handleSeasonChange = (event) => {  
         const newSeason = event.target.value;
         this.updateItems(this.state.filter.character, newSeason, this.state.filter.showUbers, this.state.filter.showCompleted);
+    }
+    handleShowUberChange = (event) => {
+        const newUberState = event.target.checked;
+        this.updateItems(this.state.filter.character, this.state.filter.season, newUberState, this.state.filter.showCompleted);
     }
 
     render() {
@@ -129,6 +131,7 @@ class ListTable extends React.Component {
                                 <FormGroup>
                                     <FormControlLabel 
                                         control={<Switch defaultChecked/>} 
+                                        onChange={this.handleShowUberChange}
                                         label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Ubers</Typography>}/>                                    
                                 </FormGroup>
                             </div>
@@ -180,7 +183,9 @@ class ListTable extends React.Component {
                         <Checklist
                             key={category}
                             title={categoryMap[category]}
-                            items={this.state.itemsByCategory[category]}
+                            items={Array.isArray(this.state.itemsByCategory[category]) ? this.state.itemsByCategory[category] : []}
+                            showUbers = {this.state.filter.showUbers}
+                            showCompleted = {this.state.filter.showCompleted}
                         />
                     ))}
                 </div>
