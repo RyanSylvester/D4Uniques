@@ -13,11 +13,11 @@ const theme = createTheme({
     },
   });
 
-const Item = ({ title }) => {
+const Item = ({ title, isUber}) => {
     return (
         <ThemeProvider theme={theme}>
             <div>
-                <div className="itemContainer">
+                <div className={isUber ? "uberItemContainer" : "itemContainer"}>
                     <div className="itemTitleWrapper">
                         <p className="itemTitle">{title}</p>
                     </div>
