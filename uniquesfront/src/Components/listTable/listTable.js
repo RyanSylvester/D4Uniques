@@ -102,10 +102,10 @@ class ListTable extends React.Component {
         this.updateItems(this.state.filter.character, this.state.filter.season, newUberState, this.state.filter.showCompleted);
     }
 
-    updateInventory = (event) => {
-        const item = event.target.value;
+    updateInventory = (item, isChecked) => {
+        
         const { userInventory } = this.state; // Get userInventory from state
-        if (event.target.checked) {
+        if (isChecked) {
             userInventory.push(item);
         } else {
             const index = userInventory.indexOf(item);
@@ -114,6 +114,7 @@ class ListTable extends React.Component {
             }
         }
         this.setState({ userInventory }); // Update userInventory in state
+        console.log(this.state.userInventory);
     }
 
     render() {

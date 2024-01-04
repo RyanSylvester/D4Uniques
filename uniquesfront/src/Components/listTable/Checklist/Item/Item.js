@@ -13,7 +13,18 @@ const theme = createTheme({
     },
   });
 
-const Item = ({item, updateInventory}) => {
+const Item = ({ item, updateInventory }) => {
+
+
+    const handleCheckboxChange = (event) => {
+        const isChecked = event.target.checked;
+        // Access the checkbox value and the item itself here
+        console.log("Checkbox value:", isChecked);
+        console.log("Item:", item);
+        // Update the inventory here using the updateInventory function
+        updateInventory(item, isChecked);
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <div>
@@ -21,9 +32,11 @@ const Item = ({item, updateInventory}) => {
                     <div className="itemTitleWrapper">
                         <p className="itemTitle">{item.name}</p>
                     </div>
-                    <Checkbox 
-                        className="itemCheck" 
+                    <Checkbox
+                        className="itemCheck"
                         color="primary"
+                        checked={item.isChecked}
+                        onChange={handleCheckboxChange}
                         sx={{
                             color: '#000000',
                             '&.Mui-checked': {
