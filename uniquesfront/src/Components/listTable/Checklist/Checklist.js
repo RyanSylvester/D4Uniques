@@ -1,7 +1,7 @@
 import React from 'react';
 import Item from './Item/Item';
 
-export default function Checklist({title, items, showUbers, showCompleted}) {
+export default function Checklist({title, items, showUbers, showCompleted, updateInventory}) {
     
     const sortedItems = [...items].sort((a, b) => { // Sort by isUber, then alphabetically
         if (a.isUber && !b.isUber) return 1;
@@ -16,7 +16,10 @@ export default function Checklist({title, items, showUbers, showCompleted}) {
                 {
                     sortedItems
                         .filter(item => showUbers ? true : !item.isUber)
-                        .map((item, index) => <Item key = {index} title={item.name} isUber={item.isUber}/>)
+                        .map((item, index) => <Item 
+                                                    key = {index} 
+                                                    item={item} 
+                                                    updateInventory={updateInventory}/>)
                 }
             </div>
         </div>

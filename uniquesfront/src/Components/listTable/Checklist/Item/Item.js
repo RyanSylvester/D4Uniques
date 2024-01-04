@@ -13,13 +13,13 @@ const theme = createTheme({
     },
   });
 
-const Item = ({ title, isUber}) => {
+const Item = ({item, updateInventory}) => {
     return (
         <ThemeProvider theme={theme}>
             <div>
-                <div className={isUber ? "uberItemContainer" : "itemContainer"}>
+                <div className={item.isUber ? "uberItemContainer" : "itemContainer"}>
                     <div className="itemTitleWrapper">
-                        <p className="itemTitle">{title}</p>
+                        <p className="itemTitle">{item.name}</p>
                     </div>
                     <Checkbox 
                         className="itemCheck" 

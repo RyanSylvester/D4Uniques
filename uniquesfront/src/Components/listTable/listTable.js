@@ -24,6 +24,7 @@ class ListTable extends React.Component {
         super(props);
         this.state = {
             items: [],
+            userInventory: [],
             itemsByCategory: {},
             filter: {
                 character: 'all',
@@ -49,6 +50,8 @@ class ListTable extends React.Component {
             })
             .catch(error => console.log(error));
     };
+
+    // const [userInventory, setUserInventory] = useState([this.state.items[0], this.state.items[1]]);
 
     categorizeItems = (items, filter) => {
         let itemsByCategory = {};
@@ -81,6 +84,8 @@ class ListTable extends React.Component {
                 filter: newFilter,
                 itemsByCategory: newItemsByCategory,
             });
+            // this.setState({userInventory: [this.state.items[0], this.state.items[1]]});
+            // console.log(this.state.userInventory)
     };
     
     handleCharacterChange = (event) => {
@@ -95,6 +100,20 @@ class ListTable extends React.Component {
     handleShowUberChange = (event) => {
         const newUberState = event.target.checked;
         this.updateItems(this.state.filter.character, this.state.filter.season, newUberState, this.state.filter.showCompleted);
+    }
+
+    updateInventory = (event) => {
+        const item = event.target.value;
+        const { userInventory } = this.state; // Get userInventory from state
+        if (event.target.checked) {
+            userInventory.push(item);
+        } else {
+            const index = userInventory.indexOf(item);
+            if (index > -1) {
+                userInventory.splice(index, 1);
+            }
+        }
+        this.setState({ userInventory }); // Update userInventory in state
     }
 
     render() {
@@ -186,6 +205,8 @@ class ListTable extends React.Component {
                             items={Array.isArray(this.state.itemsByCategory[category]) ? this.state.itemsByCategory[category] : []}
                             showUbers = {this.state.filter.showUbers}
                             showCompleted = {this.state.filter.showCompleted}
+                            updateInventory = {this.updateInventory}
+
                         />
                     ))}
                 </div>
