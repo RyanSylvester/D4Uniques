@@ -101,6 +101,10 @@ class ListTable extends React.Component {
         const newUberState = event.target.checked;
         this.updateItems(this.state.filter.character, this.state.filter.season, newUberState, this.state.filter.showCompleted);
     }
+    handleShowCompletedChange = (event) => {
+        const newCompleteState = event.target.checked;
+        this.updateItems(this.state.filter.character, this.state.filter.season, this.state.filter.showUbers, newCompleteState);
+    }
 
     updateInventory = (item, isChecked) => {
         
@@ -141,11 +145,12 @@ class ListTable extends React.Component {
                     <div className="filterBar">
                         <div className='toggles'>
                             <div className="filterToggle">
-                                    <FormGroup>
-                                        <FormControlLabel 
-                                            control={<Switch defaultChecked/>}                                         
-                                            label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Completed</Typography>}/>
-                                    </FormGroup>
+                                <FormGroup>
+                                    <FormControlLabel 
+                                        control={<Switch defaultChecked/>}
+                                        onChange={this.handleShowCompletedChange}                                  
+                                        label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Completed</Typography>}/>
+                                </FormGroup>
                             </div>
                             <div className="filterToggle">
                                 <FormGroup>
@@ -206,6 +211,7 @@ class ListTable extends React.Component {
                             items={Array.isArray(this.state.itemsByCategory[category]) ? this.state.itemsByCategory[category] : []}
                             showUbers = {this.state.filter.showUbers}
                             showCompleted = {this.state.filter.showCompleted}
+                            inventory = {this.state.userInventory}
                             updateInventory = {this.updateInventory}
 
                         />

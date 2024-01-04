@@ -13,7 +13,7 @@ const theme = createTheme({
     },
   });
 
-const Item = ({ item, updateInventory }) => {
+const Item = ({ item, isCompleted, updateInventory }) => {
 
 
     const handleCheckboxChange = (event) => {
@@ -34,8 +34,8 @@ const Item = ({ item, updateInventory }) => {
                     </div>
                     <Checkbox
                         className="itemCheck"
+                        checked={isCompleted}
                         color="primary"
-                        checked={item.isChecked}
                         onChange={handleCheckboxChange}
                         sx={{
                             color: '#000000',
