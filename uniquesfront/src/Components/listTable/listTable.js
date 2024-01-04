@@ -4,7 +4,11 @@ import Checklist from './Checklist/Checklist.js';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
+import Switch from '@mui/material/Switch';
 import MenuItem from '@mui/material/MenuItem';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Typography from '@mui/material/Typography';
 
 const theme = createTheme({
     palette: {
@@ -20,6 +24,7 @@ class ListTable extends React.Component {
         super(props);
         this.state = {
             items: [],
+            userInventory: [],
             itemsByCategory: {},
             filter: {
                 character: 'all',
@@ -46,6 +51,8 @@ class ListTable extends React.Component {
             .catch(error => console.log(error));
     };
 
+    // const [userInventory, setUserInventory] = useState([this.state.items[0], this.state.items[1]]);
+
     categorizeItems = (items, filter) => {
         let itemsByCategory = {};
         console.log(items);
@@ -53,7 +60,6 @@ class ListTable extends React.Component {
             let isCorrectCharacter = (item.character === filter.character || filter.character === "all" || item.character === "all");
             let isCorrectSeason = (item.season === filter.season || filter.season === "all");
             let isHidden = (!filter.showUbers && item.uber) || (!filter.showCompleted && item.completed)
-            console.log(item.name, isCorrectCharacter, isCorrectSeason, !isHidden);
             if (isCorrectCharacter && isCorrectSeason && !isHidden) {
                 // Create Catgory if it doesn't exist
                 if (!itemsByCategory[item.category]) {
@@ -73,18 +79,47 @@ class ListTable extends React.Component {
                 showUbers: newUberState,
                 showCompleted: newCompleteState,
             };
-            console.log(newFilter);
             const newItemsByCategory = this.categorizeItems(this.state.items, newFilter);
             this.setState({
                 filter: newFilter,
                 itemsByCategory: newItemsByCategory,
             });
+            // this.setState({userInventory: [this.state.items[0], this.state.items[1]]});
+            // console.log(this.state.userInventory)
     };
     
     handleCharacterChange = (event) => {
         const newCharacter = event.target.value;
         this.updateItems(newCharacter, this.state.filter.season, this.state.filter.showUbers, this.state.filter.showCompleted);
     };
+
+    handleSeasonChange = (event) => {  
+        const newSeason = event.target.value;
+        this.updateItems(this.state.filter.character, newSeason, this.state.filter.showUbers, this.state.filter.showCompleted);
+    }
+    handleShowUberChange = (event) => {
+        const newUberState = event.target.checked;
+        this.updateItems(this.state.filter.character, this.state.filter.season, newUberState, this.state.filter.showCompleted);
+    }
+    handleShowCompletedChange = (event) => {
+        const newCompleteState = event.target.checked;
+        this.updateItems(this.state.filter.character, this.state.filter.season, this.state.filter.showUbers, newCompleteState);
+    }
+
+    updateInventory = (item, isChecked) => {
+        
+        const { userInventory } = this.state; // Get userInventory from state
+        if (isChecked) {
+            userInventory.push(item);
+        } else {
+            const index = userInventory.indexOf(item);
+            if (index > -1) {
+                userInventory.splice(index, 1);
+            }
+        }
+        this.setState({ userInventory }); // Update userInventory in state
+        console.log(this.state.userInventory);
+    }
 
     render() {
         const categoryMap = {
@@ -108,27 +143,63 @@ class ListTable extends React.Component {
                     </div>
                     
                     <div className="filterBar">
-
-                        <div className="filterDropdown">
-                            <FormControl sx={{ml: 20, minWidth: 210 }}>
-                                <InputLabel>Class</InputLabel>
-                                <Select
-                                    label={"Class"}
-                                    value={this.state.filter.character}
-                                    onChange={this.handleCharacterChange}
-                                >  
-                                    <MenuItem value={"all"}>All Classes</MenuItem>
-                                    <MenuItem value={"barb"}>Barbarian</MenuItem>
-                                    <MenuItem value={"druid"}>Druid</MenuItem>
-                                    <MenuItem value={"necro"}>Necromancer</MenuItem>
-                                    <MenuItem value={'sorc'}>Sorcerer</MenuItem>
-                                </Select>
-                            </FormControl>
+                        <div className='toggles'>
+                            <div className="filterToggle">
+                                <FormGroup>
+                                    <FormControlLabel 
+                                        control={<Switch defaultChecked/>}
+                                        onChange={this.handleShowCompletedChange}                                  
+                                        label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Completed</Typography>}/>
+                                </FormGroup>
+                            </div>
+                            <div className="filterToggle">
+                                <FormGroup>
+                                    <FormControlLabel 
+                                        control={<Switch defaultChecked/>} 
+                                        onChange={this.handleShowUberChange}
+                                        label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Ubers</Typography>}/>                                    
+                                </FormGroup>
+                            </div>
                         </div>
 
-                        <div className="filterDropdown"></div>
-                        <div className="filterToggle"></div>
-                        <div className="filterToggle"></div>
+                        <div className="dropdowns">
+                            <div className="filterDropdown">
+                                <FormControl sx={{ml: 20, minWidth: 190}}>
+                                    <InputLabel>Class</InputLabel>
+                                    <Select
+                                        sx={{fontFamily: 'Josefin Sans, sans-serif'}}
+                                        label={"Class"}
+                                        value={this.state.filter.character}
+                                        onChange={this.handleCharacterChange}
+                                        
+                                    >  
+                                        <MenuItem value={"all"}>All Classes</MenuItem>
+                                        <MenuItem value={"barb"}>Barbarian</MenuItem>
+                                        <MenuItem value={"druid"}>Druid</MenuItem>
+                                        <MenuItem value={"necro"}>Necromancer</MenuItem>
+                                        <MenuItem value={'sorc'}>Sorcerer</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+
+                            <div className="filterDropdown">
+                                <FormControl sx={{ml: 20, minWidth: 190}}>
+                                    <InputLabel>Release</InputLabel>
+                                    <Select
+                                        sx={{fontFamily: 'Josefin Sans, sans-serif'}}
+                                        label={"Release"}
+                                        value={this.state.filter.season}
+                                        onChange={this.handleSeasonChange}
+                                    >  
+                                        <MenuItem value={"all"}>All</MenuItem>
+                                        <MenuItem value={"base"}>Base Game</MenuItem>
+                                        <MenuItem value={"S1"}>Season 1</MenuItem>
+                                        <MenuItem value={"S2"}>Season 2</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 
@@ -137,7 +208,12 @@ class ListTable extends React.Component {
                         <Checklist
                             key={category}
                             title={categoryMap[category]}
-                            items={this.state.itemsByCategory[category]}
+                            items={Array.isArray(this.state.itemsByCategory[category]) ? this.state.itemsByCategory[category] : []}
+                            showUbers = {this.state.filter.showUbers}
+                            showCompleted = {this.state.filter.showCompleted}
+                            inventory = {this.state.userInventory}
+                            updateInventory = {this.updateInventory}
+
                         />
                     ))}
                 </div>

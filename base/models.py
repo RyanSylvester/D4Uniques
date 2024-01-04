@@ -8,8 +8,9 @@ class Item(models.Model):
     category = models.CharField(max_length=30) 
     isUber = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
+    season = models.CharField(max_length=30, default = "base")
     def __str__(self):
         return self.name
 
-class CustomUser(AbstractUser):
-    items = models.ManyToManyField(Item, blank=True)
+# class CustomUser(AbstractUser):
+#     items = models.ManyToManyField(Item, blank=True)

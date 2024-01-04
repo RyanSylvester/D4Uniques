@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import Header from './Components/Header/Header.js'
 import ListTable from './Components/listTable/listTable.js'
 import './App.css';
