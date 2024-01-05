@@ -51,7 +51,18 @@ class ListTable extends React.Component {
             .catch(error => console.log(error));
     };
 
-    // const [userInventory, setUserInventory] = useState([this.state.items[0], this.state.items[1]]);
+    globalProgressCount = () => {
+        const itemsCollected = this.state.userInventory.length;
+        const totalItems = this.state.items.length;
+        return itemsCollected.toString() + "/" + totalItems.toString();
+    }
+    globalProgressPercent = () => {
+        const itemsCollected = this.state.userInventory.length;
+        const totalItems = this.state.items.length;
+
+        // return the percentage of items collected rounded to whole number
+        return Math.round((itemsCollected/totalItems)*100).toString() + "%";
+    }
 
     categorizeItems = (items, filter) => {
         let itemsByCategory = {};
@@ -84,8 +95,7 @@ class ListTable extends React.Component {
                 filter: newFilter,
                 itemsByCategory: newItemsByCategory,
             });
-            // this.setState({userInventory: [this.state.items[0], this.state.items[1]]});
-            // console.log(this.state.userInventory)
+            
     };
     
     handleCharacterChange = (event) => {
@@ -121,6 +131,7 @@ class ListTable extends React.Component {
         console.log(this.state.userInventory);
     }
 
+
     render() {
         const categoryMap = {
             'helm': 'Helm',
@@ -138,7 +149,10 @@ class ListTable extends React.Component {
                 <ThemeProvider theme={theme}>
                 <div className="tableHeader">
                     <div className="ProgressVis">
-                        <div className="Progress">100%</div>
+                        <div className="progressStrings">
+                            <div className="Progress">{this.globalProgressPercent()}</div>
+                            <div className="progressCount">{this.globalProgressCount()}</div>
+                        </div>
                         <div className="ProgressBar"/>
                     </div>
                     
