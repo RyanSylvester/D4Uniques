@@ -11,6 +11,7 @@ class Item(models.Model):
     season = models.CharField(max_length=30, default = "base")
     def __str__(self):
         return self.name
-
-# class CustomUser(AbstractUser):
-#     items = models.ManyToManyField(Item, blank=True)
+    
+class Inventory(models.Model):
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    items = models.ManyToManyField(Item, blank=True)
