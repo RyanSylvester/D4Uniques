@@ -40,15 +40,25 @@ class ListTable extends React.Component {
         fetch('http://127.0.0.1:8000')
             .then(response => response.json())
             .then(data => {
-                let items = []; 
-                data.forEach(item => {
-                    items.push(item);
-                });
+                let items = data;
                 this.setState({items: items}, () => {
                     this.updateItems(this.state.filter.character, this.state.filter.season, this.state.filter.showUbers, this.state.filter.showCompleted);
+
+                    // Load inventory from local storage
+                    const storedItemIDs = JSON.parse(localStorage.getItem('userInventory'));
+                    if (storedItemIDs) {
+                        const storedInventory = storedItemIDs.map(id => this.state.items.find(item => item.id === id));
+                        this.setState({userInventory: storedInventory});
+                        console.log("Inventory loaded from local storage");
+                        console.log(storedInventory);
+                    }
+                    console.log("local storage")
                 });
             })
             .catch(error => console.log(error));
+            
+            
+            // console.log(localStorage);
     };
 
     globalProgressCount = () => {
@@ -128,7 +138,10 @@ class ListTable extends React.Component {
             }
         }
         this.setState({ userInventory }); // Update userInventory in state
+        const itemIDs = userInventory.map(item => item.id);
+        localStorage.setItem('userInventory', JSON.stringify(itemIDs));
         console.log(this.state.userInventory);
+        console.log(localStorage);
     }
 
 

@@ -8,7 +8,6 @@ export default function Checklist({title, items, showUbers, showCompleted, inven
         if (!a.isUber && b.isUber) return -1;
         return a.name.localeCompare(b.name);
     });
-    console.log(inventory);
 
     return (
         <div>
