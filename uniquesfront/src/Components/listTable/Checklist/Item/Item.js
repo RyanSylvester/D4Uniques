@@ -18,10 +18,6 @@ const Item = ({ item, isCompleted, updateInventory }) => {
 
     const handleCheckboxChange = (event) => {
         const isChecked = event.target.checked;
-        // Access the checkbox value and the item itself here
-        console.log("Checkbox value:", isChecked);
-        console.log("Item:", item);
-        // Update the inventory here using the updateInventory function
         updateInventory(item, isChecked);
     };
 
