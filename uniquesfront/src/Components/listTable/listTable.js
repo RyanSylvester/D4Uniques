@@ -13,9 +13,12 @@ import Button from '@mui/material/Button';
 
 const theme = createTheme({
     palette: {
-      primary: {
+    primary: {
         main: '#F3F3F3', 
-      },
+    },
+    secondary: {
+        main: '#5A5B74',
+    },
     },
   });
 
@@ -173,6 +176,7 @@ class ListTable extends React.Component {
                                 <Button 
                                 variant="outlined"
                                 onClick={this.resetInventory}
+                                style={{fontFamily: 'Josefin Sans, sans-serif', color:'#5A5B74', borderColor:'#5A5B74', fontWeight: 700}}
                                 >RESET</Button>
                             </div>
                         )}
