@@ -40,12 +40,24 @@ body {
   display: flex;
 }
 
+.resetButton{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
 .ProgressVis{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   margin-left: 50px;
-  margin-top: 30px;
+  margin-top: 40px;
   color: #5A5B74;
   font-weight: 700;
   font-size: 40px;
+  height: 96px;
+  
+  
 }
 .progressStrings{
   display: flex;
@@ -54,7 +66,7 @@ body {
   margin-right: 20px;
 }
 .Progress{
-  margin-top: 30px;
+  margin-top: 0px;
   text-align: left;
   /* background-color: #ffcd57; */
 }

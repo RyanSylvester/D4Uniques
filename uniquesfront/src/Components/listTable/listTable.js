@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 const theme = createTheme({
     palette: {
@@ -161,6 +162,11 @@ class ListTable extends React.Component {
                 <ThemeProvider theme={theme}>
                 <div className="tableHeader">
                     <div className="ProgressVis">
+                        {this.state.userInventory.length > 0 && (
+                            <div className="resetButton">
+                                <Button variant="outlined">RESET</Button>
+                            </div>
+                        )}
                         <div className="progressStrings">
                             <div className="Progress">{this.globalProgressPercent()}</div>
                             <div className="progressCount">{this.globalProgressCount()}</div>
