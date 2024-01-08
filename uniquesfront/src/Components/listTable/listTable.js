@@ -37,18 +37,27 @@ class ListTable extends React.Component {
 
     componentDidMount() {
         // Fetch items from DB
+        if (this.state.items.length === 0) {
         fetch('http://127.0.0.1:8000')
             .then(response => response.json())
             .then(data => {
-                let items = []; 
-                data.forEach(item => {
-                    items.push(item);
-                });
+                let items = data;
                 this.setState({items: items}, () => {
                     this.updateItems(this.state.filter.character, this.state.filter.season, this.state.filter.showUbers, this.state.filter.showCompleted);
+                    console.log("Items loaded from DB");
+                    // Load inventory from local storage
+                    const storedItemIDs = JSON.parse(localStorage.getItem('userInventory'));
+                    if (storedItemIDs) {
+                        const storedInventory = storedItemIDs.map(id => this.state.items.find(item => item.id === id));
+                        this.setState({userInventory: storedInventory});
+                        console.log("Inventory loaded from local storage: ", storedInventory);
+                    }
                 });
             })
             .catch(error => console.log(error));
+        }
+            
+            // console.log(localStorage);
     };
 
     globalProgressCount = () => {
@@ -66,7 +75,7 @@ class ListTable extends React.Component {
 
     categorizeItems = (items, filter) => {
         let itemsByCategory = {};
-        console.log(items);
+        // console.log(items);
         items.forEach(item => {
             let isCorrectCharacter = (item.character === filter.character || filter.character === "all" || item.character === "all");
             let isCorrectSeason = (item.season === filter.season || filter.season === "all");
@@ -128,7 +137,10 @@ class ListTable extends React.Component {
             }
         }
         this.setState({ userInventory }); // Update userInventory in state
-        console.log(this.state.userInventory);
+        const itemIDs = userInventory.map(item => item.id);
+        localStorage.setItem('userInventory', JSON.stringify(itemIDs));
+        console.log("Inventory: ", this.state.userInventory);
+        // console.log(localStorage);
     }
 
 
