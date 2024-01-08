@@ -30,7 +30,7 @@ Storm's Companion,druid,pants,FALSE,base
 Tempest Roar,druid,helm,FALSE,base
 Vasily's Prayer,druid,helm,FALSE,base
 Waxing Gibbous,druid,weapon,FALSE,base
-"100,000 Steps",barb,Boots,FALSE,base
+"100,000 Steps",barb,boots,FALSE,base
 Ancient's Oath,barb,weapon,FALSE,base
 Azurewrath,barb,weapon,FALSE,S1
 Battle Trance,barb,jewelery,FALSE,base
@@ -57,7 +57,7 @@ Asheara's Khanjar,rogue,weapon,FALSE,base
 Condemnation,rogue,weapon,FALSE,base
 Cowl of the Nameless,rogue,helm,FALSE,base
 Eaglehorn,rogue,weapon,FALSE,S1
-Eyes in the Dark,rogue,Pants,FALSE,base
+Eyes in the Dark,rogue,pants,FALSE,base
 Grasp of Shadow,rogue,gloves,FALSE,base
 Scoundrel's Leathers,rogue,chest,FALSE,S2
 Skyhunter,rogue,weapon,FALSE,base

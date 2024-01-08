@@ -9,12 +9,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 const theme = createTheme({
     palette: {
-      primary: {
+    primary: {
         main: '#F3F3F3', 
-      },
+    },
+    secondary: {
+        main: '#5A5B74',
+    },
     },
   });
 
@@ -26,6 +30,7 @@ class ListTable extends React.Component {
             items: [],
             userInventory: [],
             itemsByCategory: {},
+            loading: true,
             filter: {
                 character: 'all',
                 season: 'all',
@@ -42,7 +47,7 @@ class ListTable extends React.Component {
             .then(response => response.json())
             .then(data => {
                 let items = data;
-                this.setState({items: items}, () => {
+                this.setState({items: items, loading: false}, () => {
                     this.updateItems(this.state.filter.character, this.state.filter.season, this.state.filter.showUbers, this.state.filter.showCompleted);
                     console.log("Items loaded from DB");
                     // Load inventory from local storage
@@ -54,7 +59,10 @@ class ListTable extends React.Component {
                     }
                 });
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error);
+                this.setState({loading: false});
+            });
         }
             
             // console.log(localStorage);
@@ -140,7 +148,16 @@ class ListTable extends React.Component {
         const itemIDs = userInventory.map(item => item.id);
         localStorage.setItem('userInventory', JSON.stringify(itemIDs));
         console.log("Inventory: ", this.state.userInventory);
+
+        // log items not yet collected
+        console.log(this.state.items.filter(item => !this.state.userInventory.includes(item)));
         // console.log(localStorage);
+    }
+
+    resetInventory = () => {
+        this.setState({userInventory: []});
+        localStorage.setItem('userInventory', JSON.stringify([]));
+        console.log("Inventory has been cleared.")
     }
 
 
@@ -156,94 +173,109 @@ class ListTable extends React.Component {
         };
 
         return (
-            
             <div className="uniquesTable">
+                {!this.state.loading && (
                 <ThemeProvider theme={theme}>
-                <div className="tableHeader">
-                    <div className="ProgressVis">
-                        <div className="progressStrings">
-                            <div className="Progress">{this.globalProgressPercent()}</div>
-                            <div className="progressCount">{this.globalProgressCount()}</div>
-                        </div>
-                        <div className="ProgressBar"/>
-                    </div>
-                    
-                    <div className="filterBar">
-                        <div className='toggles'>
-                            <div className="filterToggle">
-                                <FormGroup>
-                                    <FormControlLabel 
-                                        control={<Switch defaultChecked/>}
-                                        onChange={this.handleShowCompletedChange}                                  
-                                        label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Completed</Typography>}/>
-                                </FormGroup>
+                    <div className="tableHeader">
+                            <div className="ProgressVis">
+                                {this.state.userInventory.length > 0 && (
+                                    <div className="resetButton">
+                                        <Button 
+                                        variant="outlined"
+                                        onClick={this.resetInventory}
+                                        style={{fontFamily: 'Josefin Sans, sans-serif', color:'#5A5B74', borderColor:'#5A5B74', fontWeight: 700}}
+                                        >RESET</Button>
+                                    </div>
+                                )}
+                                
+                                    <div className="progressStrings">
+                                        <div className="Progress">{this.globalProgressPercent()}</div>
+                                        <div className="progressCount">{this.globalProgressCount()}</div>
+                                    </div>
+                                    <div className="ProgressBar">
+                                        <div className="ProgressFill" style={{width: this.globalProgressPercent()}}></div>
+                                    </div>  
                             </div>
-                            <div className="filterToggle">
-                                <FormGroup>
-                                    <FormControlLabel 
-                                        control={<Switch defaultChecked/>} 
-                                        onChange={this.handleShowUberChange}
-                                        label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Ubers</Typography>}/>                                    
-                                </FormGroup>
-                            </div>
-                        </div>
-
-                        <div className="dropdowns">
-                            <div className="filterDropdown">
-                                <FormControl sx={{ml: 20, minWidth: 190}}>
-                                    <InputLabel>Class</InputLabel>
-                                    <Select
-                                        sx={{fontFamily: 'Josefin Sans, sans-serif'}}
-                                        label={"Class"}
-                                        value={this.state.filter.character}
-                                        onChange={this.handleCharacterChange}
-                                        
-                                    >  
-                                        <MenuItem value={"all"}>All Classes</MenuItem>
-                                        <MenuItem value={"barb"}>Barbarian</MenuItem>
-                                        <MenuItem value={"druid"}>Druid</MenuItem>
-                                        <MenuItem value={"necro"}>Necromancer</MenuItem>
-                                        <MenuItem value={'sorc'}>Sorcerer</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </div>
-
-                            <div className="filterDropdown">
-                                <FormControl sx={{ml: 20, minWidth: 190}}>
-                                    <InputLabel>Release</InputLabel>
-                                    <Select
-                                        sx={{fontFamily: 'Josefin Sans, sans-serif'}}
-                                        label={"Release"}
-                                        value={this.state.filter.season}
-                                        onChange={this.handleSeasonChange}
-                                    >  
-                                        <MenuItem value={"all"}>All</MenuItem>
-                                        <MenuItem value={"base"}>Base Game</MenuItem>
-                                        <MenuItem value={"S1"}>Season 1</MenuItem>
-                                        <MenuItem value={"S2"}>Season 2</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </div>
-                        </div>
                         
-                    </div>
-                </div>
-                
-                <div className="listContainer">
-                    {Object.keys(categoryMap).map(category => (
-                        <Checklist
-                            key={category}
-                            title={categoryMap[category]}
-                            items={Array.isArray(this.state.itemsByCategory[category]) ? this.state.itemsByCategory[category] : []}
-                            showUbers = {this.state.filter.showUbers}
-                            showCompleted = {this.state.filter.showCompleted}
-                            inventory = {this.state.userInventory}
-                            updateInventory = {this.updateInventory}
+                        
+                        <div className="filterBar">
+                            <div className='toggles'>
+                                <div className="filterToggle">
+                                    <FormGroup>
+                                        <FormControlLabel 
+                                            control={<Switch defaultChecked/>}
+                                            onChange={this.handleShowCompletedChange}                                  
+                                            label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Completed</Typography>}/>
+                                    </FormGroup>
+                                </div>
+                                <div className="filterToggle">
+                                    <FormGroup>
+                                        <FormControlLabel 
+                                            control={<Switch defaultChecked/>} 
+                                            onChange={this.handleShowUberChange}
+                                            label={<Typography sx={{fontFamily: 'Josefin Sans, sans-serif'}}>Show Ubers</Typography>}/>                                    
+                                    </FormGroup>
+                                </div>
+                            </div>
 
-                        />
-                    ))}
-                </div>
+                            <div className="dropdowns">
+                                <div className="filterDropdown">
+                                    <FormControl sx={{ml: 20, minWidth: 190}}>
+                                        <InputLabel>Class</InputLabel>
+                                        <Select
+                                            sx={{fontFamily: 'Josefin Sans, sans-serif'}}
+                                            label={"Class"}
+                                            value={this.state.filter.character}
+                                            onChange={this.handleCharacterChange}
+                                        >  
+                                            <MenuItem value={"all"}>All Classes</MenuItem>
+                                            <MenuItem value={"barb"}>Barbarian</MenuItem>
+                                            <MenuItem value={"druid"}>Druid</MenuItem>
+                                            <MenuItem value={"necro"}>Necromancer</MenuItem>
+                                            <MenuItem value={'sorc'}>Sorcerer</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
+
+                                <div className="filterDropdown">
+                                    <FormControl sx={{ml: 20, minWidth: 190}}>
+                                        <InputLabel>Release</InputLabel>
+                                        <Select
+                                            sx={{fontFamily: 'Josefin Sans, sans-serif'}}
+                                            label={"Release"}
+                                            value={this.state.filter.season}
+                                            onChange={this.handleSeasonChange}
+                                        >  
+                                            <MenuItem value={"all"}>All</MenuItem>
+                                            <MenuItem value={"base"}>Base Game</MenuItem>
+                                            <MenuItem value={"S1"}>Season 1</MenuItem>
+                                            <MenuItem value={"S2"}>Season 2</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                    <div className="listContainer">
+                        {Object.keys(categoryMap).map(category => (
+                            <Checklist
+                                key={category}
+                                title={categoryMap[category]}
+                                items={Array.isArray(this.state.itemsByCategory[category]) ? this.state.itemsByCategory[category] : []}
+                                showUbers = {this.state.filter.showUbers}
+                                showCompleted = {this.state.filter.showCompleted}
+                                inventory = {this.state.userInventory}
+                                updateInventory = {this.updateInventory}
+
+                            />
+                        ))}
+                    
+                    </div>
+                
                 </ThemeProvider>
+                )}
             </div>
         );
     }
