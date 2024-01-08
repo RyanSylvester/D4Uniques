@@ -144,6 +144,12 @@ class ListTable extends React.Component {
         // console.log(localStorage);
     }
 
+    resetInventory = () => {
+        this.setState({userInventory: []});
+        localStorage.setItem('userInventory', JSON.stringify([]));
+        console.log("Inventory has been cleared.")
+    }
+
 
     render() {
         const categoryMap = {
@@ -164,7 +170,10 @@ class ListTable extends React.Component {
                     <div className="ProgressVis">
                         {this.state.userInventory.length > 0 && (
                             <div className="resetButton">
-                                <Button variant="outlined">RESET</Button>
+                                <Button 
+                                variant="outlined"
+                                onClick={this.resetInventory}
+                                >RESET</Button>
                             </div>
                         )}
                         <div className="progressStrings">
