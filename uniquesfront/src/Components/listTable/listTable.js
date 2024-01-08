@@ -144,6 +144,9 @@ class ListTable extends React.Component {
         const itemIDs = userInventory.map(item => item.id);
         localStorage.setItem('userInventory', JSON.stringify(itemIDs));
         console.log("Inventory: ", this.state.userInventory);
+
+        // log items not yet collected
+        console.log(this.state.items.filter(item => !this.state.userInventory.includes(item)));
         // console.log(localStorage);
     }
 
@@ -184,7 +187,9 @@ class ListTable extends React.Component {
                             <div className="Progress">{this.globalProgressPercent()}</div>
                             <div className="progressCount">{this.globalProgressCount()}</div>
                         </div>
-                        <div className="ProgressBar"/>
+                        <div className="ProgressBar">
+                            <div className="ProgressFill" style={{width: this.globalProgressPercent()}}></div>
+                        </div>
                     </div>
                     
                     <div className="filterBar">
@@ -216,7 +221,6 @@ class ListTable extends React.Component {
                                         label={"Class"}
                                         value={this.state.filter.character}
                                         onChange={this.handleCharacterChange}
-                                        
                                     >  
                                         <MenuItem value={"all"}>All Classes</MenuItem>
                                         <MenuItem value={"barb"}>Barbarian</MenuItem>
