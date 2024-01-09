@@ -68,16 +68,33 @@ class ListTable extends React.Component {
             // console.log(localStorage);
     };
 
+    getClassItemCollectedCount = () => {
+        if (this.state.filter.character === 'all'){
+            return this.state.userInventory.length
+        }
+        else{       
+            return this.state.userInventory.filter(item =>
+                item.character === "all" || item.character === this.state.filter.character).length
+        }
+    }
+
+    getClassItemCount = () => {
+        if (this.state.filter.character === 'all'){
+            return this.state.items.length
+        }else{
+            return this.state.items.filter(item =>
+                item.character === "all" || item.character === this.state.filter.character).length
+        }
+    }
+
     globalProgressCount = () => {
-        const itemsCollected = this.state.userInventory.length;
-        const totalItems = this.state.items.length;
+        const itemsCollected = this.getClassItemCollectedCount();
+        const totalItems = this.getClassItemCount();
         return itemsCollected.toString() + "/" + totalItems.toString();
     }
     globalProgressPercent = () => {
-        const itemsCollected = this.state.userInventory.length;
-        const totalItems = this.state.items.length;
-
-        // return the percentage of items collected rounded to whole number
+        const itemsCollected = this.getClassItemCollectedCount();
+        const totalItems = this.getClassItemCount();
         return Math.round((itemsCollected/totalItems)*100).toString() + "%";
     }
 
